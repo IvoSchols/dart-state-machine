@@ -22,26 +22,41 @@ class Transition {
   /// [State] to transition the machine to when executing
   get to => _to;
 
-  Transition._(this.name, this._machine, this._from, this._to);
+  /// [BinaryExpressionTree] that determines whether or not
+  /// this transition can occur.
+  final BinaryExpressionTree? _conditions;
 
-  /// Returns true if transition can be executed,
+  /// [Map] of [String]s to [String]s that contains the
+  /// names and types of the conditions
+  final Map<String, String> _variableDeclarations;
+
+  Transition._(
+    this.name,
+    this._machine,
+    this._from,
+    this._to,
+    this._conditions,
+    this._variableDeclarations,
+  );
+
+  /// Returns true if transition can be executed, with these variable values
   /// false if it's not possible.
-  bool canCall([payload]) {
-    State current = _machine.current;
-    // Verify if the transition is valid from the current state.
-    if (!_from.contains(current)) {
-      return false;
-    }
+  bool canCall(Map<String, String> variableValues) {
+    // State current = _machine.current;
+    // // Verify if the transition is valid from the current state.
+    // if (!_from.contains(current)) {
+    //   return false;
+    // }
 
-    // Check conditionals
+    // // Check conditionals
 
     return true;
   }
 
   /// Returns true if the transition succeeded, false
   /// if it was canceled.
-  bool call([payload]) {
-    if (!canCall(payload)) {
+  bool call(Map<String, String> variableValues) {
+    if (!canCall(variableValues)) {
       return false;
     }
 

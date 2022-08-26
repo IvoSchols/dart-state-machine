@@ -9,7 +9,7 @@ class State {
   String name;
 
   /// [StateMachine] that this state is a part of.
-  StateMachine _machine;
+  final StateMachine _machine;
 
   /// List of state transitions that can be made from this state.
   List<Transition> _transitions = [];

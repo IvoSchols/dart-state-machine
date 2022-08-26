@@ -22,7 +22,7 @@ class StateMachine {
   /// Unmodifiable list of states created by for this machine.
   List<State> get states => List.unmodifiable(_states);
 
-  StateMachine(String this.name);
+  StateMachine(this.name);
 
   /// Create a new [State] for this [StateMachine].
   ///
@@ -42,11 +42,16 @@ class StateMachine {
   /// This transition will only succeed when this [StateMachine]
   /// is in one of the states listed in [from]. When this transition
   /// occurs, this [StateMachine] will move to the [to] state.
-  Transition newStateTransition(String name, List<State> from, State to) {
+  Transition newStateTransition(String name, List<State> from, State to,
+      {BinaryExpressionTree? conditions,
+      Map<String, String>? variableDeclarations}) {
     if (_started) {
       throw ('Cannot create new state transition ($name) once the machine has been started.');
     }
-    Transition newTransition = Transition._(name, this, from, to);
+    conditions = conditions ?? BinaryExpressionTree();
+    variableDeclarations = variableDeclarations ?? {};
+    Transition newTransition =
+        Transition._(name, this, from, to, conditions, variableDeclarations);
     for (State state in from) {
       state.addTransition(newTransition);
     }
