@@ -24,19 +24,19 @@ class Transition {
 
   /// [BinaryExpressionTree] that determines whether or not
   /// this transition can occur.
-  final BinaryExpressionTree? _conditions;
+  final BinaryExpressionTree? conditions;
 
   /// [Map] of [String]s to [String]s that contains the
   /// names and types of the conditions
-  final Map<String, String> _variableDeclarations;
+  final Map<String, String> inputTypes;
 
   Transition._(
     this.name,
     this._machine,
     this._from,
     this._to,
-    this._conditions,
-    this._variableDeclarations,
+    this.conditions,
+    this.inputTypes,
   );
 
   /// Returns true if transition can be executed, with these variable values
