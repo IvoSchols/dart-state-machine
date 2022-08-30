@@ -1,6 +1,6 @@
 part of '../state_machine.dart';
 
-class Transition extends Equatable {
+class Transition {
   /// Name of the state transition. Used for debugging.
   final String name;
 
