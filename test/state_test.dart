@@ -10,16 +10,16 @@ void main() {
       expect(machine.states.contains(state), isTrue);
       expect(state.transitions, isEmpty);
     });
-    // test('can be added to a state machine', () {
-    //   StateMachine machine = StateMachine('test');
-    //   State state = machine.newState('test');
-    //   expect(machine.states, [state]);
-    // });
+    test('can be added to a state machine', () {
+      StateMachine machine = StateMachine('test');
+      State state = machine.newState('test');
+      expect(machine.states, [state]);
+    });
 
-    // test('can be added to a state machine only once', () {
-    //   StateMachine machine = StateMachine('test');
-    //   State state = machine.newState('test');
-    //   expect(() => machine.newState('test'), throwsException);
-    // });
+    test('can be added to a state machine only once', () {
+      StateMachine machine = StateMachine('test');
+      State state = machine.newState('test');
+      expect(() => machine.newState('test'), throwsException);
+    });
   });
 }

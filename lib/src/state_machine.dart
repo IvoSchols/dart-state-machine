@@ -4,23 +4,37 @@ class StateMachine {
   /// Name of the state machine. Used for debugging.
   final String name;
 
-  /// [State] that the machine is currently in.
-  State get current => _current ?? initial;
-  State? _current;
+  /// Initial state when the machine is started or first state added.
+  State? _initial;
+
+  /// Initial state when the machine is started.
+  State get initial =>
+      _initial ?? (throw UnsupportedError('No state has yet been added.'));
 
   /// Whether or not this state machine has been started.
   /// If it has, calls to [newState] and [newStateTransition]
   /// will be prevented.
   bool _started = false;
 
-  /// Initial state when the machine is started.
-  late State initial;
+  /// [State] that the machine is currently in.
+  State get current => _current ?? initial;
+  State? _current;
 
   /// List of states created by for this machine.
-  final List<State> _states = [];
+  final Set<State> _states = {};
 
   /// Unmodifiable list of states created by for this machine.
   List<State> get states => List.unmodifiable(_states);
+
+  /// List of transitions created by for this machine.
+  final Map<State, Set<Transition>> _transitions = {};
+
+  /// Unmodifiable list of transitions created by for this machine.
+  Set<Transition> get allTransitions =>
+      Set.unmodifiable(_transitions.values.expand((e) => e));
+
+  /// Unmodifiable map of transitions per state.
+  Map<State, Set<Transition>> get transitions => Map.unmodifiable(_transitions);
 
   StateMachine(this.name);
 
@@ -31,8 +45,13 @@ class StateMachine {
     if (_started) {
       throw ('Cannot create new state ($name) once the machine has been started.');
     }
+
     State state = State._(name, this);
+
+    _initial ??= state;
+
     _states.add(state);
+    _transitions[state] = {};
     return state;
   }
 
@@ -42,28 +61,28 @@ class StateMachine {
   /// This transition will only succeed when this [StateMachine]
   /// is in one of the states listed in [from]. When this transition
   /// occurs, this [StateMachine] will move to the [to] state.
-  Transition newTransition(String name, List<State> from, State to,
-      {BinaryExpressionTree? conditions,
-      LinkedHashMap<String, String>? variableDeclarations}) {
+  Transition newTransition(String name, Set<State> from, State to,
+      {Map? conditions}) {
     if (_started) {
       throw ('Cannot create new state transition ($name) once the machine has been started.');
     }
-    conditions = conditions ?? BinaryExpressionTree();
-    variableDeclarations = variableDeclarations ?? LinkedHashMap();
-    Transition newTransition =
-        Transition._(name, this, from, to, conditions, variableDeclarations);
+
+    Transition newTransition = Transition._(name, this, from, to, conditions);
+
     for (State state in from) {
-      state.addTransition(newTransition);
+      // Transition set is guaranteed to exist, if belongs to [this]. (See [newState])
+      _transitions[state]!.add(newTransition);
     }
+
     return newTransition;
   }
 
-  /// Start the state machine at the given starting state.
-  void start(State startingState) {
+  /// Start the state machine at either initial or the given starting state.
+  void start([State? startingState]) {
     if (_started) throw StateError('Machine has already been started.');
     _started = true;
-    _current = startingState;
-    initial = startingState;
+    _current = startingState ?? _initial;
+    _initial = startingState ?? _initial;
   }
 
   /// Set the machine state and trigger a state change event.
