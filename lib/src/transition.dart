@@ -59,7 +59,4 @@ class Transition {
 
     return true;
   }
-
-  @override
-  List<Object?> get props => [name, machine, from, to, conditions, inputTypes];
 }
