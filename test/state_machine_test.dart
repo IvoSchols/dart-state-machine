@@ -71,6 +71,18 @@ void main() {
       expect(machine.states, equals({state}));
     });
 
+    test('Expect adding same state does not reset transitions for state', () {
+      State state = machine.newState('test');
+      State state2 = machine.newState('test2');
+      machine.newTransition('test', {state}, state2);
+      machine.newState('test');
+      expect(state.transitions, hasLength(1));
+      expect(state.transitions, equals(machine.transitions[state]));
+      machine.newState('test');
+      expect(state.transitions, hasLength(1));
+      expect(state.transitions, equals(machine.transitions[state]));
+    });
+
     test('Expect empty transitions', () {
       expect(machine.transitions, isEmpty);
     });

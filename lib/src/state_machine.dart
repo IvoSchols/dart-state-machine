@@ -49,8 +49,7 @@ class StateMachine {
 
     _initial ??= state;
 
-    _states.add(state);
-    _transitions[state] = {};
+    if (_states.add(state)) _transitions[state] = {};
     return state;
   }
 

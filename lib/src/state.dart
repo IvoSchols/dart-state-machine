@@ -4,7 +4,7 @@ part of '../state_machine.dart';
 /// [StateMachine] instance.
 ///
 /// States must be created from a [StateMachine] instance:
-class State {
+class State extends Equatable {
   /// Name of the state. Used for debugging.
   final String name;
 
@@ -21,4 +21,8 @@ class State {
 
   /// Determine whether or not this [State] is active.
   bool get isActive => _machine.current == this;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [name, _machine];
 }
