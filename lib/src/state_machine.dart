@@ -44,12 +44,12 @@ class StateMachine {
   /// occurs, this [StateMachine] will move to the [to] state.
   Transition newStateTransition(String name, List<State> from, State to,
       {BinaryExpressionTree? conditions,
-      Map<String, String>? variableDeclarations}) {
+      LinkedHashMap<String, String>? variableDeclarations}) {
     if (_started) {
       throw ('Cannot create new state transition ($name) once the machine has been started.');
     }
     conditions = conditions ?? BinaryExpressionTree();
-    variableDeclarations = variableDeclarations ?? {};
+    variableDeclarations = variableDeclarations ?? LinkedHashMap();
     Transition newTransition =
         Transition._(name, this, from, to, conditions, variableDeclarations);
     for (State state in from) {
