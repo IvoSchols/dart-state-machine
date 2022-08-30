@@ -11,13 +11,13 @@ class State {
   /// [StateMachine] that this state is a part of.
   final StateMachine _machine;
 
-  /// Unmodifiable list of state transitions that can be made from this state.
-  Set<Transition> get transitions => _machine.transitions[this] ?? {};
-
   State._(
     this.name,
     this._machine,
   );
+
+  /// Unmodifiable list of state transitions that can be made from this state.
+  Set<Transition> get transitions => _machine.transitions[this] ?? {};
 
   /// Determine whether or not this [State] is active.
   bool get isActive => _machine.current == this;

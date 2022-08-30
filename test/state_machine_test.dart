@@ -19,7 +19,7 @@ void main() {
     });
 
     test('Expect initial equals start state', () {
-      State state = machine.newState('test');
+      machine.newState('test');
       State state2 = machine.newState('test2');
       machine.start(state2);
       expect(machine.initial, equals(state2));

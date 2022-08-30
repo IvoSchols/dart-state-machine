@@ -29,15 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  binary_expression_tree:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: e2192f5a392166bb9061ee966beeb656406d82ae
-      url: "https://github.com/IvoSchols/dart-binary-expression-tree"
-    source: git
-    version: "1.0.5"
   boolean_selector:
     dependency: transitive
     description:

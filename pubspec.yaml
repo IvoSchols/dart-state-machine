@@ -1,6 +1,6 @@
 name: state_machine
-description: A sample command-line application.
-version: 1.0.0
+description: A most simple implementation of an extended state machine.
+version: 1.0.1
 # homepage: https://www.example.com
 publish_to: none
 
@@ -9,9 +9,6 @@ environment:
   
 dependencies:
   analyzer: ^4.3.1
-
-  binary_expression_tree:
-    git: https://github.com/IvoSchols/dart-binary-expression-tree
 
 dev_dependencies:
   lints: ^2.0.0
