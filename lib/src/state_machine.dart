@@ -42,7 +42,7 @@ class StateMachine {
   /// This transition will only succeed when this [StateMachine]
   /// is in one of the states listed in [from]. When this transition
   /// occurs, this [StateMachine] will move to the [to] state.
-  Transition newStateTransition(String name, List<State> from, State to,
+  Transition newTransition(String name, List<State> from, State to,
       {BinaryExpressionTree? conditions,
       LinkedHashMap<String, String>? variableDeclarations}) {
     if (_started) {

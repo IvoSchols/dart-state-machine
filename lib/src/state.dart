@@ -6,7 +6,7 @@ part of '../state_machine.dart';
 /// States must be created from a [StateMachine] instance:
 class State {
   /// Name of the state. Used for debugging.
-  String name;
+  final String name;
 
   /// [StateMachine] that this state is a part of.
   final StateMachine _machine;
