@@ -7,24 +7,23 @@ class StateMachine {
   /// Initial state when the machine is started or first state added.
   State? _initial;
 
-  /// Initial state when the machine is started.
   State get initial =>
       _initial ?? (throw UnsupportedError('No state has yet been added.'));
 
   /// Whether or not this state machine has been started.
-  /// If it has, calls to [newState] and [newStateTransition]
-  /// will be prevented.
+  /// If it has, calls to [newState] and [newTransition] will throw
   bool _started = false;
 
   /// [State] that the machine is currently in.
-  State get current => _current ?? initial;
   State? _current;
+
+  State get current => _current ?? initial;
 
   /// List of states created by for this machine.
   final Set<State> _states = {};
 
   /// Unmodifiable list of states created by for this machine.
-  List<State> get states => List.unmodifiable(_states);
+  Set<State> get states => Set.unmodifiable(_states);
 
   /// List of transitions created by for this machine.
   final Map<State, Set<Transition>> _transitions = {};
@@ -88,6 +87,5 @@ class StateMachine {
   /// Set the machine state and trigger a state change event.
   void _transition(Transition t) {
     _current = t.to;
-    //perform action
   }
 }
