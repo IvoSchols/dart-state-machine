@@ -26,9 +26,9 @@ class Transition {
   /// this transition can occur.
   final BinaryExpressionTree? conditions;
 
-  /// [Map] of [String]s to [String]s that contains the
+  /// [LinkedHashMap] of [String]s to [String]s that contains the
   /// names and types of the conditions
-  final Map<String, String> inputTypes;
+  final LinkedHashMap<String, String> inputTypes;
 
   Transition._(
     this.name,
