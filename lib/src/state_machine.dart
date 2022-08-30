@@ -2,7 +2,7 @@ part of '../state_machine.dart';
 
 class StateMachine {
   /// Name of the state machine. Used for debugging.
-  String name;
+  final String name;
 
   /// [State] that the machine is currently in.
   State get current => _current ?? initial;

@@ -1,26 +1,19 @@
 part of '../state_machine.dart';
 
-class Transition {
+class Transition extends Equatable {
   /// Name of the state transition. Used for debugging.
   final String name;
 
   /// List of valid [State]s that the machine must be in
   /// for this transition to occur.
-  final List<State> _from;
-
-  /// Unmodifiable list of valid [State]s that the machine must be in
-  /// for this transition to occur.
-  List<State> get from => List.unmodifiable(_from);
+  final List<State> from;
 
   /// [StateMachine] that this state transition is a part of.
-  final StateMachine _machine;
+  final StateMachine machine;
 
   /// [State] to transition the machine to when executing
   /// this transition.
-  final State _to;
-
-  /// [State] to transition the machine to when executing
-  get to => _to;
+  final State to;
 
   /// [BinaryExpressionTree] that determines whether or not
   /// this transition can occur.
@@ -32,9 +25,9 @@ class Transition {
 
   Transition._(
     this.name,
-    this._machine,
-    this._from,
-    this._to,
+    this.machine,
+    this.from,
+    this.to,
     this.conditions,
     this.inputTypes,
   );
@@ -62,8 +55,11 @@ class Transition {
 
     // Transition is legal and wasn't canceled.
     // Update the machine state.
-    _machine._transition(this);
+    machine._transition(this);
 
     return true;
   }
+
+  @override
+  List<Object?> get props => [name, machine, from, to, conditions, inputTypes];
 }
