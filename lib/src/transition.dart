@@ -17,14 +17,6 @@ class Transition extends Equatable {
 
   final Map? conditions;
 
-  // /// [BinaryExpressionTree] that determines whether or not
-  // /// this transition can occur.
-  // final BinaryExpressionTree? conditions;
-
-  // /// [LinkedHashMap] of [String]s to [String]s that contains the
-  // /// names and types of the conditions
-  // final LinkedHashMap<String, String> inputTypes;
-
   Transition._(
     this.name,
     this.machine,
