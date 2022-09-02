@@ -1,6 +1,6 @@
 part of '../state_machine.dart';
 
-class Transition {
+class Transition extends Equatable {
   /// Name of the state transition. Used for debugging.
   final String name;
 
@@ -50,4 +50,7 @@ class Transition {
 
     return true;
   }
+
+  @override
+  List<Object?> get props => [name, machine, from, to, conditions];
 }
