@@ -83,7 +83,7 @@ class StateMachine {
     _initial = startingState ?? _initial;
   }
 
-  /// Set the machine state and trigger a state change event.
+  /// Set the machine state
   void _transition(Transition t) {
     _current = t.to;
   }

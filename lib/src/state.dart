@@ -23,6 +23,5 @@ class State extends Equatable {
   bool get isActive => _machine.current == this;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [name, _machine];
 }

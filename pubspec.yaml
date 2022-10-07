@@ -1,8 +1,7 @@
-name: state_machine
-description: A most simple implementation of an extended state machine.
+name: simple_state_machine
+description: A simple implementation of an extended state machine. Implement own conditions. No variable support (yet).
 version: 1.0.2
-# homepage: https://www.example.com
-publish_to: none
+repository: https://github.com/IvoSchols/dart-state-machine
 
 environment:
   sdk: '>=2.17.6 <3.0.0'
