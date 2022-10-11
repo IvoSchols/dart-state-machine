@@ -107,5 +107,17 @@ void main() {
       expect(machine.allTransitions, isNotEmpty);
       expect(machine.allTransitions, equals({transition, transition2}));
     });
+
+    test('Expect throw on create state when machine is started', () {
+      machine.start();
+      expect(() => machine.newState('test'), throwsA(isA<Exception>()));
+    });
+
+    test('Expect throw on create transition when machine is started', () {
+      State state = machine.newState('test');
+      machine.start();
+      expect(() => machine.newTransition('test', {}, state),
+          throwsA(isA<Exception>()));
+    });
   });
 }

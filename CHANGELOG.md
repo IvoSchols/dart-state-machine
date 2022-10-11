@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Added tests based on lcov
+
 ## 1.0.2
 
 - Caught bug, added test and added package: equatable

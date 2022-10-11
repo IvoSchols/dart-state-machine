@@ -42,7 +42,8 @@ class StateMachine {
   /// [name] helps identify the state for debugging purposes.
   State newState(String name) {
     if (_started) {
-      throw ('Cannot create new state ($name) once the machine has been started.');
+      throw Exception(
+          'Cannot create new state ($name) once the machine has been started.');
     }
 
     State state = State._(name, this);
@@ -62,7 +63,8 @@ class StateMachine {
   Transition newTransition(String name, Set<State> from, State to,
       {Map? conditions}) {
     if (_started) {
-      throw ('Cannot create new state transition ($name) once the machine has been started.');
+      throw Exception(
+          'Cannot create new state transition ($name) once the machine has been started.');
     }
 
     Transition newTransition = Transition._(name, this, from, to, conditions);
